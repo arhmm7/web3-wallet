@@ -42,6 +42,10 @@
             setMnemonic(generateWalletMnemonic());
         }
 
+        const importRecoveryPhrase = () => {
+            // Implement Importing of Recovery Phrases for login
+        }
+
         const createSolanaAccount = async () => {
             setAccountLoading(true);
             if (mnemonic) {
@@ -85,6 +89,17 @@
                 { (!mnemonic) && <button className="bg-zinc-900 text-white text-md justify-center md:min-w-100 min-w-50 p-2 rounded-full flex  gap-2 items-center font-semibold" onClick={createWallet}>
                     {!accountLoading ? (
                         <><FaWallet size={15} className="text-lime-300"/> Create Account</>
+                    ) : (
+                        <>
+                            <div className="flex items-center justify-center">
+                                <div className="w-5 h-5 border-3 border-black border-t-lime-300 rounded-full animate-spin"></div>
+                            </div>
+                        </>
+                    )}
+                </button>}
+                { (!mnemonic) && <button className="bg-zinc-900 text-white text-md justify-center md:min-w-100 min-w-50 p-2 rounded-full flex  gap-2 items-center font-semibold" onClick={importRecoveryPhrase>
+                    {!accountLoading ? (
+                        <><FaWallet size={15} className="text-lime-300"/> Import Recovery Phrase</>
                     ) : (
                         <>
                             <div className="flex items-center justify-center">
