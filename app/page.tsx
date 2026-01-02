@@ -3,7 +3,7 @@
     import Image from "next/image";
     import {useEffect,useState} from "react";
     import { SiSolana } from "react-icons/si";
-    import {FaLockOpen, FaRegCopy, FaWallet} from "react-icons/fa";
+    import {FaFileImport, FaLockOpen, FaRegCopy, FaWallet} from "react-icons/fa";
     import {generateSolanaAccount, generateWalletMnemonic} from "@/utils/web3";
     import { FiEye } from "react-icons/fi";
     import { FiEyeOff } from "react-icons/fi";
@@ -13,6 +13,7 @@
     import bs58 from "bs58";
     import {MdPublic} from "react-icons/md";
     import logo from "../assets/indie.png"
+    import PhraseForm from "../components/PhraseFrom"
     import { FaCheck } from "react-icons/fa";
     import Head from 'next/head';
 
@@ -27,6 +28,7 @@
         const [showKey, setShowKey] = useState<boolean>();
         const [accountLoading, setAccountLoading] = useState<boolean>(false);
         const [copied, setCopied] = useState(false);
+        const [showPhraseForm,setShowPhraseForm] = useState<boolean>(false);
 
         const handleCopy = async () => {
             try {
@@ -43,8 +45,12 @@
         }
 
         const importRecoveryPhrase = () => {
-            // Implement Importing of Recovery Phrases for login
+            setIndex(0);
+            setSolana([]);
+            setMnemonic(undefined);
+            setShowPhraseForm(true);
         }
+        
 
         const createSolanaAccount = async () => {
             setAccountLoading(true);
@@ -81,8 +87,11 @@
         }
 
         return (
-            <div className="flex flex-col gap-5 min-h-screen py-20 items-center justify-start font-sans bg-zinc-800">
-                <div className="md:max-w-[50vw] max-w-[90vw] flex flex-col gap-5 items-center">
+            <div className="flex flex-col gap-5 min-h-screen items-center justify-start font-sans bg-zinc-800">
+                { showPhraseForm && <PhraseForm value={mnemonic} setValue={setMnemonic} setShowForm={setShowPhraseForm}/>
+
+                }
+                <div className="md:max-w-[50vw] max-w-[90vw] flex flex-col gap-5 items-center pt-20">
                 {
                     logo &&  <Image src={logo} alt="logo" className="w-50"></Image>
                 }
@@ -97,9 +106,9 @@
                         </>
                     )}
                 </button>}
-                { (!mnemonic) && <button className="bg-zinc-900 text-white text-md justify-center md:min-w-100 min-w-50 p-2 rounded-full flex  gap-2 items-center font-semibold" onClick={importRecoveryPhrase>
+                { (!mnemonic) && <button className="bg-zinc-900 text-white text-md justify-center md:min-w-100 min-w-50 p-2 rounded-full flex  gap-2 items-center font-semibold" onClick={importRecoveryPhrase}>
                     {!accountLoading ? (
-                        <><FaWallet size={15} className="text-lime-300"/> Import Recovery Phrase</>
+                        <><FaFileImport size={15} className="text-lime-300"/> Import Recovery Phrase</>
                     ) : (
                         <>
                             <div className="flex items-center justify-center">
@@ -128,6 +137,9 @@
                                     </div>
                                 </>
                             )}
+                        </button>
+                        <button className="bg-zinc-900 text-white text-md justify-center w-full p-2 rounded-xl flex  gap-2 items-center font-semibold" onClick={importRecoveryPhrase}>
+                             <><FaFileImport size={15} className="text-lime-300"/> Import Another Wallet</>
                         </button>
                         <div className="w-full">
                             <div className="w-full flex flex-col gap-3">
