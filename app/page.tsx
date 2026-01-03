@@ -15,6 +15,7 @@
     import logo from "../assets/indie.png"
     import PhraseForm from "../components/PhraseFrom"
     import { FaCheck } from "react-icons/fa";
+    import { motion } from "motion/react"
     import Head from 'next/head';
 
     const url = "https://solana-mainnet.g.alchemy.com/v2/XUfXOe9FHGZEkgmK_XVPP";
@@ -91,11 +92,11 @@
                 { showPhraseForm && <PhraseForm value={mnemonic} setValue={setMnemonic} setShowForm={setShowPhraseForm}/>
 
                 }
-                <div className="md:max-w-[50vw] max-w-[90vw] flex flex-col gap-5 items-center pt-20">
+                <div className="md:max-w-[30vw] max-w-[90vw] flex flex-col gap-5 items-center pt-20">
                 {
-                    logo &&  <Image src={logo} alt="logo" className="w-50"></Image>
+                    logo &&  <motion.div initial={{opacity:0,y:-100}} animate={{opacity:1,y:0}}><Image src={logo} alt="logo" className="w-50"/></motion.div>
                 }
-                { (!mnemonic) && <button className="bg-zinc-900 text-white text-md justify-center md:min-w-100 min-w-50 p-2 rounded-full flex  gap-2 items-center font-semibold" onClick={createWallet}>
+                { (!mnemonic) && <motion.button initial={{scale:0}} animate={{scale:1}}  whileTap={{scale:0.9}}  className="bg-zinc-900 text-white text-md justify-center md:min-w-100 min-w-50 p-2 rounded-full flex  gap-2 items-center font-semibold" onClick={createWallet}>
                     {!accountLoading ? (
                         <><FaWallet size={15} className="text-lime-300"/> Create Account</>
                     ) : (
@@ -105,8 +106,8 @@
                             </div>
                         </>
                     )}
-                </button>}
-                { (!mnemonic) && <button className="bg-zinc-900 text-white text-md justify-center md:min-w-100 min-w-50 p-2 rounded-full flex  gap-2 items-center font-semibold" onClick={importRecoveryPhrase}>
+                </motion.button>}
+                { (!mnemonic) && <motion.button  initial={{scale:0}} animate={{scale:1}} whileTap={{scale:0.9}} className="bg-zinc-900 text-white text-md justify-center md:min-w-100 min-w-50 p-2 rounded-full flex  gap-2 items-center font-semibold" onClick={importRecoveryPhrase}>
                     {!accountLoading ? (
                         <><FaFileImport size={15} className="text-lime-300"/> Import Recovery Phrase</>
                     ) : (
@@ -116,18 +117,18 @@
                             </div>
                         </>
                     )}
-                </button>}
+                </motion.button>}
                 { mnemonic &&
-                <div className="relative bg-zinc-900 w-full shadow-inner shadow-zinc-950  p-4 rounded-xl">
+                <motion.div  initial={{scale:0}} animate={{scale:1}} whileHover={{scale:1.05}} className="relative bg-zinc-900 w-full shadow-inner shadow-zinc-950  p-4 rounded-xl">
                     <h1 className="text-xl font-semibold">Mnemonic</h1>
                     <p className="text-zinc-400 text-sm flex items-center my-1">{mnemonic}</p>
                     { copied ? (<FaCheck className="absolute top-4 right-4 text-gray-500 hover:text-gray-300 cursor-pointer"></FaCheck>) : (
                     <FaRegCopy onClick={()=> handleCopy()} className="absolute top-4 right-4 text-gray-500 hover:text-gray-300 cursor-pointer"/>)}
-                </div>
+                </motion.div>
                 }
                 {mnemonic && (
                     <>
-                        <button className="bg-lime-300 w-full justify-center text-black  rounded-xl p-2 px-10 flex gap-2 items-center" onClick={createSolanaAccount}>
+                        <motion.button initial={{opacity:0}} animate={{opacity:1}} whileHover={{scale:1.05}}  className="bg-lime-300 hover:shadow-md shadow-lime-500/20 transition w-full justify-center text-black  rounded-xl p-2 px-10 flex gap-2 items-center" onClick={createSolanaAccount}>
                             {!accountLoading ? (
                                 <><IoMdAdd/> Create New <SiSolana/> Solana Wallet</>
                             ) : (
@@ -137,14 +138,17 @@
                                     </div>
                                 </>
                             )}
-                        </button>
-                        <button className="bg-zinc-900 text-white text-md justify-center w-full p-2 rounded-xl flex  gap-2 items-center font-semibold" onClick={importRecoveryPhrase}>
+                        </motion.button>
+                        <motion.button initial={{opacity:0}} animate={{opacity:1}} whileHover={{scale:1.05}}   className="bg-zinc-900 text-white text-md justify-center w-full p-2 rounded-xl flex  gap-2 items-center font-semibold" onClick={importRecoveryPhrase}>
                              <><FaFileImport size={15} className="text-lime-300"/> Import Another Wallet</>
-                        </button>
+                        </motion.button>
                         <div className="w-full">
                             <div className="w-full flex flex-col gap-3">
                                 {solana.map((address, idx) => (
-                                    <div key={idx} className="bg-zinc-900 p-4 rounded-xl shadow-inner shadow-zinc-950 ">
+                                    <motion.div 
+                                    initial={{y:200}}
+                                    animate={{y:0}}
+                                    key={idx} className="bg-zinc-900 p-4 rounded-xl shadow-inner shadow-zinc-950 ">
                                         <div className="flex flex-row gap-2 items-center ">
                                             <SiSolana className="text-purple-500"/>
                                             <p className="text-zinc-400 text-sm">Account <span className="text-white font-semibold">{idx+1}</span></p>
@@ -173,7 +177,7 @@
                                                 </p>
                                             </div>
                                         )}
-                                    </div>
+                                    </motion.div>
                                 ))}
                             </div>
                         </div>
