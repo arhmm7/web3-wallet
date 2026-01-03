@@ -96,7 +96,7 @@
                 {
                     logo &&  <motion.div initial={{opacity:0,y:-100}} animate={{opacity:1,y:0}}><Image src={logo} alt="logo" className="w-50"/></motion.div>
                 }
-                { (!mnemonic) && <motion.button initial={{scale:0}} animate={{scale:1}}  whileTap={{scale:0.9}}  className="bg-zinc-900 text-white text-md justify-center md:min-w-100 min-w-50 p-2 rounded-full flex  gap-2 items-center font-semibold" onClick={createWallet}>
+                { (!mnemonic) && <motion.button initial={{scale:0}} animate={{scale:1}}  whileTap={{scale:0.9}}  className="bg-zinc-900 text-white text-md justify-center md:min-w-100 min-w-[90vw]  p-2 rounded-full flex  gap-2 items-center font-semibold" onClick={createWallet}>
                     {!accountLoading ? (
                         <><FaWallet size={15} className="text-lime-300"/> Create Account</>
                     ) : (
@@ -107,7 +107,7 @@
                         </>
                     )}
                 </motion.button>}
-                { (!mnemonic) && <motion.button  initial={{scale:0}} animate={{scale:1}} whileTap={{scale:0.9}} className="bg-zinc-900 text-white text-md justify-center md:min-w-100 min-w-50 p-2 rounded-full flex  gap-2 items-center font-semibold" onClick={importRecoveryPhrase}>
+                { (!mnemonic) && <motion.button  initial={{scale:0}} animate={{scale:1}} whileTap={{scale:0.9}} className="bg-zinc-900 text-white text-md justify-center md:min-w-100 min-w-[90vw] p-2 rounded-full flex  gap-2 items-center font-semibold" onClick={importRecoveryPhrase}>
                     {!accountLoading ? (
                         <><FaFileImport size={15} className="text-lime-300"/> Import Recovery Phrase</>
                     ) : (
