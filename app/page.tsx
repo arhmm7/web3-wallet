@@ -143,7 +143,7 @@
                              <><FaFileImport size={15} className="text-lime-300"/> Import Another Wallet</>
                         </motion.button>
                         <div className="w-full">
-                            <div className="w-full flex flex-col gap-3">
+                            <div className="w-full flex flex-col gap-3 mb-20">
                                 {solana.map((address, idx) => (
                                     <motion.div 
                                     initial={{y:200}}
